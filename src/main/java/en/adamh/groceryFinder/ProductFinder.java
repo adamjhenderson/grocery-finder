@@ -51,9 +51,8 @@ public class ProductFinder {
 
 	private String getTitleFromLink(Element titleLink) {
 		Element titleLinkElement = titleLink.getAllElements().get(0);
-		titleLinkElement.baseUri();
-
 		String title = "";
+		
 		for (Node node : titleLinkElement.childNodes()) {
 			if (!(node instanceof TextNode)) {
 				continue;
@@ -105,8 +104,7 @@ public class ProductFinder {
 		Element descriptionParagraph = descriptionContainer.getElementsByTag("p").get(0);
 		TextNode descriptionNode = (TextNode) descriptionParagraph.childNodes().get(0);
 
-		String description = descriptionNode.getWholeText();
-		return description;
+		return descriptionNode.getWholeText();
 	}
 
 	private int getCalories(Element moreInfoPage) {
@@ -114,7 +112,6 @@ public class ProductFinder {
 		Elements nutritionTables = moreInfoPage.getElementsByClass("nutritionTable");
 		if (!nutritionTables.isEmpty()) {
 			Element nutritionTable = moreInfoPage.getElementsByClass("nutritionTable").get(0);
-
 			Element caloriesRow = nutritionTable.getElementsByTag("tr").get(2);
 			Element caloriesCell = caloriesRow.getElementsByTag("td").get(0);
 			String caloriesString = caloriesCell.html();
